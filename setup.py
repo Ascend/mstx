@@ -1,9 +1,24 @@
 from setuptools import setup
+from setuptools.command.install import install
 import subprocess
+import os
 import re
 from packaging.tags import sys_tags
 
 tag = next(sys_tags())
+
+class CustomInstall(install):
+    def run(self):
+        install.run(self)
+        # 安装路径 = site-packages
+        install_dir = os.path.abspath(self.install_lib)
+        src = os.path.join("lib64", "mstx.so")
+        dst = os.path.join(install_dir, "mstx.so")
+        src_abs = os.path.join(install_dir, src)
+        if os.path.exists(dst) or os.path.islink(dst):
+            os.unlink(dst)
+        rel_src = os.path.relpath(src_abs, install_dir)
+        os.symlink(rel_src, dst)
 
 def get_git_url():
     url = 'https://gitcode.com/Ascend/mstx'
@@ -44,6 +59,7 @@ setup(
         'bdist_wheel':{
             'plat_name': tag.platform}},
     packages = ['lib64', 'include'],
+    cmdclass={"install": CustomInstall},
     include_package_data = True,
     license= 'MIT',
     classifiers = [
