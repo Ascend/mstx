@@ -2,6 +2,7 @@ from setuptools import setup
 import subprocess
 import re
 from packaging.tags import sys_tags
+import os
 
 tag = next(sys_tags())
 
@@ -33,7 +34,7 @@ def get_git_url():
 
 setup(
     name = 'mstx',
-    version = '26.0.0',
+    version = os.environ.get('WHL_VERSION', '26.0.0'),
     author =' mstx',
     author_email = 'mstx',
     description = 'mstx',
