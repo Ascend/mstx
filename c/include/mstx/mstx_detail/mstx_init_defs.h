@@ -70,6 +70,13 @@ MSTX_INNER_FUNC_DEFINE void mstxMemRegionsUnregisterInit(mstxDomainHandle_t doma
     return mstxMemRegionsUnregister(domain, desc);
 }
 
+MSTX_INNER_FUNC_DEFINE void mstxMemPermissionsAssignInit(mstxDomainHandle_t domain,
+                                                         mstxMemPermissionsAssignBatch_t const *desc)
+{
+    mstxInitOnce();
+    return mstxMemPermissionsAssign(domain, desc);
+}
+
 MSTX_INNER_FUNC_DEFINE mstxDomainHandle_t mstxDomainCreateAInit(const char *name)
 {
     mstxInitOnce();

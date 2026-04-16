@@ -44,6 +44,9 @@ int CheckFuncPointerAllNull(void)
     if (g_mstxContext.mstxMemRegionsUnregisterPtr != NULL) {
         return 0;
     }
+    if (g_mstxContext.mstxMemPermissionsAssignPtr != NULL) {
+        return 0;
+    }
     if (g_mstxContext.mstxDomainCreateAPtr != NULL) {
         return 0;
     }
@@ -102,6 +105,11 @@ void MstxMemRegionsUnregisterTest(mstxDomainHandle_t domain, const mstxMemRegion
     return mstxMemRegionsUnregister(domain, desc);
 }
 
+void MstxMemPermissionsAssignTest(mstxDomainHandle_t domain, const mstxMemPermissionsAssignBatch_t *desc)
+{
+    return mstxMemPermissionsAssign(domain, desc);
+}
+
 mstxDomainHandle_t MstxDomainCreateATest(const char* name)
 {
     return mstxDomainCreateA(name);
@@ -138,6 +146,7 @@ void MstxDeInit(void)
     g_mstxContext.mstxMemHeapUnregisterPtr = mstxMemHeapUnregisterInit;
     g_mstxContext.mstxMemRegionsRegisterPtr = mstxMemRegionsRegisterInit;
     g_mstxContext.mstxMemRegionsUnregisterPtr = mstxMemRegionsUnregisterInit;
+    g_mstxContext.mstxMemPermissionsAssignPtr = mstxMemPermissionsAssignInit;
 
     g_mstxContext.mstxDomainCreateAPtr = mstxDomainCreateAInit;
     g_mstxContext.mstxDomainDestroyPtr = mstxDomainDestroyInit;

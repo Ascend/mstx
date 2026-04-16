@@ -97,6 +97,16 @@ MSTX_DECLSPEC void mstxMemRegionsUnregister(mstxDomainHandle_t domain, mstxMemRe
 #endif // MSTX_DISABLE
 }
 
+MSTX_DECLSPEC void mstxMemPermissionsAssign(mstxDomainHandle_t domain, mstxMemPermissionsAssignBatch_t const *desc)
+{
+#ifndef MSTX_DISABLE
+    mstxMemPermissionsAssignFunc local = g_mstxContext.mstxMemPermissionsAssignPtr;
+    if (local != NULL) {
+        (*local)(domain, desc);
+    }
+#endif // MSTX_DISABLE
+}
+
 MSTX_DECLSPEC mstxDomainHandle_t mstxDomainCreateA(const char *name)
 {
 #ifndef MSTX_DISABLE

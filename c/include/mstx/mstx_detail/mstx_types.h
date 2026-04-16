@@ -28,6 +28,7 @@ typedef mstxMemHeapHandle_t (* mstxMemHeapRegisterFunc)(mstxDomainHandle_t domai
 typedef void (* mstxMemHeapUnregisterFunc)(mstxDomainHandle_t domain, mstxMemHeapHandle_t heap);
 typedef void (* mstxMemRegionsRegisterFunc)(mstxDomainHandle_t domain, mstxMemRegionsRegisterBatch_t const *desc);
 typedef void (* mstxMemRegionsUnregisterFunc)(mstxDomainHandle_t domain, mstxMemRegionsUnregisterBatch_t const *desc);
+typedef void (* mstxMemPermissionsAssignFunc)(mstxDomainHandle_t domain, mstxMemPermissionsAssignBatch_t const *desc);
 typedef mstxDomainHandle_t (* mstxDomainCreateAFunc)(const char* name);
 typedef void (* mstxDomainDestroyFunc)(mstxDomainHandle_t domain);
 typedef void (* mstxDomainMarkAFunc)(mstxDomainHandle_t domain, const char *message, aclrtStream stream);
@@ -49,6 +50,7 @@ typedef enum mstxImplCoreMemFuncId {
     MSTX_API_CORE_MEMHEAP_UNREGISTER        = 2,
     MSTX_API_CORE_MEM_REGIONS_REGISTER      = 3,
     MSTX_API_CORE_MEM_REGIONS_UNREGISTER    = 4,
+    MSTX_API_CORE_MEM_PERMISSIONS_ASSIGN    = 5,
     MSTX_API_CORE_MEM_SIZE,                   // end of the enum, new enum items must be added before this
     MSTX_API_CORE_MEM_FORCE_INT             = 0x7fffffff
 } mstxImplCoreMemFuncId;

@@ -123,6 +123,40 @@ typedef struct mstxMemRegionsUnregisterBatch_t {
     mstxMemRegionRef_t const *refArray;
 } mstxMemRegionsUnregisterBatch_t;
 
+/** @brief There are no permissions for this memory
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_NONE 0x00
+
+/** @brief The memory is readable
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_READ 0x01
+
+/** @brief The memory is writable
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_WRITE 0x02
+
+/** @brief The memory is accessable among multiple devices
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_SHARED 0x04
+
+/** @brief Description for memory permissions assigned to region
+  * @member flags - permission flags from MSTX_MEM_PERMISSIONS_REGION_FLAGS_*
+  * @member region - region reference to registered virtual memory region
+  */
+typedef struct mstxMemPermissionsAssignRegionsDesc_t {
+    uint32_t flags;
+    mstxMemRegionRef_t region;
+} mstxMemPermissionsAssignRegionsDesc_t;
+
+/** @brief Description for a Batch of memory permissions assigned to regions
+  * @member regionCount - count of elements in regionDescArray
+  * @member regionDescArray - array of memory permissions assignment descriptions
+  */
+typedef struct mstxMemPermissionsAssignBatch_t {
+    size_t regionCount;
+    mstxMemPermissionsAssignRegionsDesc_t const *regionDescArray;
+} mstxMemPermissionsAssignBatch_t;
+
 static mstxDomainHandle_t const globalDomain = NULL;
 
 /**
@@ -160,6 +194,14 @@ MSTX_DECLSPEC void mstxMemRegionsRegister(mstxDomainHandle_t domain, mstxMemRegi
  * @param desc - description of a batch of region references
  */
 MSTX_DECLSPEC void mstxMemRegionsUnregister(mstxDomainHandle_t domain, mstxMemRegionsUnregisterBatch_t const *desc);
+
+/**
+ * @ingroup MSTX
+ * @brief Change the permissions of a region of process virtual memory
+ * @param domain - domain the suballocations belongs to
+ * @param desc - description of a batch of permission descriptions assigned to region references
+ */
+MSTX_DECLSPEC void mstxMemPermissionsAssign(mstxDomainHandle_t domain, mstxMemPermissionsAssignBatch_t const *desc);
 
 #ifdef __cplusplus
 } // extern "C"
