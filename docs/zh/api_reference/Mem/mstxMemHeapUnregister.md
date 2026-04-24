@@ -38,7 +38,7 @@ void mstxMemHeapUnregister(mstxDomainHandle_t domain, mstxMemHeapHandle_t heap)
 </td>
 <td class="cellrowborder" valign="top" width="26.72267226722672%" headers="mcps1.2.4.1.2 "><p id="zh-cn_topic_0000002215920417_p723015144436"><a name="zh-cn_topic_0000002215920417_p723015144436"></a><a name="zh-cn_topic_0000002215920417_p723015144436"></a>输入</p>
 </td>
-<td class="cellrowborder" valign="top" width="44.62446244624462%" headers="mcps1.2.4.1.3 "><p id="zh-cn_topic_0000002215920417_p3243153110413"><a name="zh-cn_topic_0000002215920417_p3243153110413"></a><a name="zh-cn_topic_0000002215920417_p3243153110413"></a>domain为内存池所属的域，为globalDomain或<a href="../Domain/mstxDomainCreateA.md">mstxDomainCreateA</a>返回的句柄。</p>
+<td class="cellrowborder" valign="top" width="44.62446244624462%" headers="mcps1.2.4.1.3 "><p id="zh-cn_topic_0000002215920417_p3243153110413"><a name="zh-cn_topic_0000002215920417_p3243153110413"></a><a name="zh-cn_topic_0000002215920417_p3243153110413"></a>domain为内存池所属的域，为globalDomain或<a href="../Common/mstxDomainCreateA.md">mstxDomainCreateA</a>返回的句柄。</p>
 <p id="zh-cn_topic_0000002215920417_p17135131418533"><a name="zh-cn_topic_0000002215920417_p17135131418533"></a><a name="zh-cn_topic_0000002215920417_p17135131418533"></a>数据类型：const char *。</p>
 </td>
 </tr>
