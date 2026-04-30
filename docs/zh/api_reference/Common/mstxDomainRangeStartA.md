@@ -19,7 +19,7 @@
 
 **函数原型<a id="section1121883194711"></a>**
 
-```python
+```c
 mstxRangeId mstxDomainRangeStartA(mstxDomainHandle_t domain, const char *message, aclrtStream stream)
 ```
 

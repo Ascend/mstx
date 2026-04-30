@@ -17,7 +17,7 @@
 
 **函数原型<a id="zh-cn_topic_0000002216005989_section1121883194711"></a>**
 
-```python
+```c
 mstxMemHeapHandle_t mstxMemHeapRegister(mstxDomainHandle_t domain, mstxMemHeapDesc_t const *desc)
 ```
 

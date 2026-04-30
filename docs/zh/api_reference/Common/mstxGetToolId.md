@@ -65,7 +65,7 @@ void mstxGetToolId(uint64 *id)
 
 **调用示例<a id="zh-cn_topic_0000002446914857_section16621124213476"></a>**
 
-```py
+```c
 uint64 id;
 mstxGetToolId(&id);
 ```

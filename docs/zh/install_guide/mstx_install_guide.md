@@ -2,24 +2,14 @@
 
 <br>
 
+## 1. 安装说明
+
 msTX工具的安装方式包括：
 
-- 二进制安装：msTX工具完整功能已集成在CANN包中发布，可直接安装CANN包，具体请参见[二进制安装](#1-二进制安装)。
-- 源码安装：如需使用最新代码的功能，或对源码进行修改以增强功能，可下载本仓库代码，自行编译、打包工具并完成安装，具体请参见[源码安装](#2-源码安装)。
+- 使用CANN包安装：msKL工具完整功能已集成在CANN包中，请参考《[CANN 快速安装](https://www.hiascend.com/cann/download)》安装昇腾NPU驱动和CANN软件（包含Toolkit和ops包），并配置环境变量。
+- 源码编译安装：如需使用最新代码的功能，或对源码进行修改以增强功能，可下载本仓库代码，自行编译、打包工具并完成安装，具体请参见[源码编译安装](#2-源码编译安装)。
 
-## 1. 二进制安装
-
-MindStudio工具链是集成到CANN包中发布的，可通过以下方式完成安装：
-
-### 方式一：依据 CANN 官方文档安装  
-
-请参考《[CANN 官方安装指南](https://www.hiascend.com/cann/download)》，按文档逐步完成安装与配置。
-
-### 方式二：使用 CANN 官方容器镜像
-
-请访问《[CANN 官方镜像仓库](https://www.hiascend.com/developer/ascendhub/detail/17da20d1c2b6493cb38765adeba85884)》，按仓库中的指引完成镜像拉取及容器启动。
-
-## 2. 源码安装
+## 2. 源码编译安装
 
 如需使用最新代码的功能，或对源码进行修改以增强功能，可下载本仓库代码，自行编译、打包工具并完成安装。
 
@@ -29,15 +19,24 @@ MindStudio工具链是集成到CANN包中发布的，可通过以下方式完成
 
 ### 2.2 项目依赖
 
-由于本项目中的代码依赖python3的头文件，因此需要编译环境中安装python3-dev包，可通过如下命令执行：
+- 克隆本仓库
 
-```sh
-apt-get install python3-dev
-```
+    ```sh
+    git clone https://gitcode.com/Ascend/mstx.git
+    ```
+
+- 下载依赖
+
+    由于本项目中的代码依赖python3的头文件，因此需要编译环境中安装python3-dev包，可通过如下命令执行：
+
+    ```sh
+    apt-get install python3-dev
+    ```
 
 ### 2.3 构建打包
 
 ```sh
+cd mstx
 python build.py
 ```
 
@@ -48,7 +47,7 @@ cd output
 pip3 install mstx-xxxxx.whl
 ```
 
-## 2.5 升级
+### 2.5 升级
 
 如需使用whl包替换运行环境原有已安装的whl包，执行如下安装操作：
 
@@ -56,12 +55,9 @@ pip3 install mstx-xxxxx.whl
 pip3 install mstx-xxxxx.whl --force-reinstall
 ```
 
-安装过程中，若提示是否替换原有安装包：
-输入"y"，则安装包会自动完成升级操作。
+### 2.6 卸载
 
-## 2.6 卸载
-
-卸载则通过如下命令卸载：
+可通过如下命令卸载：
 
 ```sh
 pip3 uninstall mstx-xxxxx.whl 
