@@ -13,7 +13,7 @@
 
 **功能说明<a id="zh-cn_topic_0000002180759810_section20806203412478"></a>**
 
-注册内存池二次分配。用户需保证RegionsRegister的内存位于[mstxMemHeapRegister](../Mem/mstxMemHeapRegister.md)注册的范围内，否则工具会提示越界读写。
+注册内存池二次分配。用户需保证mstxRegionsRegister的内存位于[mstxMemHeapRegister](../Mem/mstxMemHeapRegister.md)注册的范围内，否则工具会提示越界读写。
 
 **函数原型<a id="zh-cn_topic_0000002180759810_section1121883194711"></a>**
 
@@ -70,7 +70,7 @@ typedef struct mstxMemRegionsRegisterBatch_t {
 
 **调用示例<a id="zh-cn_topic_0000002180759810_section377820328555"></a>**
 
-```shell
+```c
 mstxMemRegionsRegisterBatch_t regionsDesc{};
 regionsDesc.heap = memPool;
 regionsDesc.regionType = MSTX_MEM_TYPE_VIRTUAL_ADDRESS;

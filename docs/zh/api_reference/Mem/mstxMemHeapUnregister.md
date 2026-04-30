@@ -17,7 +17,7 @@
 
 **函数原型<a id="zh-cn_topic_0000002215920417_section1121883194711"></a>**
 
-```python
+```cpp
 void mstxMemHeapUnregister(mstxDomainHandle_t domain, mstxMemHeapHandle_t heap)
 ```
 
@@ -61,7 +61,7 @@ typedef mstxMemHeap_t* mstxMemHeapHandle_t;</pre>
 
 **调用示例<a id="zh-cn_topic_0000002215920417_section7800053122316"></a>**
 
-```py
+```cpp
 mstxMemHeapDesc_t heapDesc{};
 mstxMemHeapHandle_t memPool = mstxMemHeapRegister(globalDomain, &heapDesc); // 注册内存池
 ...
