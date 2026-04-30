@@ -2,7 +2,7 @@
 
 本节介绍MindStudio Tools Extension Library（工具扩展接口库，msTX）打点接口。可以自定义采集时间段或者关键函数的开始和结束时间点，识别关键函数或迭代等信息，对性能和算子问题快速定界。
 
-默认情况下msTX API无任何功能，需要在用户应用程序中调用msTX API后，根据不同场景使能msTX打点功能，例如使用msprof命令行采集时配置--mstx=on、使用AscendCL API采集时配置ACL_PROF_MSPROFTX以及Ascend PyTorch Profiler接口采集时配置mstx=True等。
+默认情况下msTX API无任何功能，需要在用户应用程序中调用msTX API后，根据不同场景使能msTX打点功能，例如使用msopprof命令行采集时配置--mstx=on、使用AscendCL API采集时配置ACL_PROF_MSPROFTX以及Ascend PyTorch Profiler接口采集时配置mstx=True等。
 
 - 库文件libms_tools_ext.so路径：**\$\{INSTALL_DIR\}**/lib64/。
 - 使用头文件编译时，用户程序编译时需链接dl库。头文件ms_tools_ext.h路径：**\$\{INSTALL_DIR\}**/include/mstx。

@@ -29,9 +29,19 @@ msTX工具的安装方式包括：
 
     由于本项目中的代码依赖python3的头文件，因此需要编译环境中安装python3-dev包，可通过如下命令执行：
 
-    ```sh
-    apt-get install python3-dev
-    ```
+    - OpenEuler环境：
+
+        ```sh
+        yum install python3-devel
+        ```
+
+    - Ubuntu环境：
+    
+        ```sh
+        apt-get install python3-dev
+        ```
+        
+    注意：非root用户需在命令前增加sudo，例如：`sudo yum install python3-devel`。
 
 ### 2.3 构建打包
 
