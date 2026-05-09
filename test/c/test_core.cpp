@@ -37,6 +37,7 @@ EXTERN mstxMemHeapHandle_t MstxMemHeapRegisterTest(mstxDomainHandle_t domain, ms
 EXTERN void MstxMemHeapUnregisterTest(mstxDomainHandle_t domain, mstxMemHeapHandle_t heap);
 EXTERN void MstxMemRegionsRegisterTest(mstxDomainHandle_t domain, mstxMemRegionsRegisterBatch_t const* desc);
 EXTERN void MstxMemRegionsUnregisterTest(mstxDomainHandle_t domain, mstxMemRegionsUnregisterBatch_t const* desc);
+EXTERN void MstxMemPermissionsAssignTest(mstxDomainHandle_t domain, const mstxMemPermissionsAssignBatch_t *desc);
 EXTERN void MstxMarkATest(const char *message, aclrtStream stream);
 EXTERN mstxRangeId MstxRangeStartATest(const char *message, aclrtStream stream);
 EXTERN void MstxRangeEndTest(mstxRangeId id);
@@ -321,6 +322,14 @@ TEST(CoreApi, test_init_with_mem_regions_unregisterr_expect_init_success)
     MstxDeInit();
     ASSERT_TRUE(GetInitResult() == 0);
     MstxMemRegionsUnregisterTest(globalDomain, nullptr);
+    ASSERT_TRUE(GetInitResult() != 0);
+}
+
+TEST(CoreApi, test_init_with_mem_permission_assign_expect_init_success)
+{
+    MstxDeInit();
+    ASSERT_TRUE(GetInitResult() == 0);
+    MstxMemPermissionsAssignTest(globalDomain, nullptr);
     ASSERT_TRUE(GetInitResult() != 0);
 }
 

@@ -96,6 +96,21 @@ typedef struct mstxMemRegionsUnregisterBatch_t {
     mstxMemRegionRef_t const *refArray;
 } mstxMemRegionsUnregisterBatch_t;
 
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_NONE 0x00
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_READ 0x01
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_WRITE 0x02
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_SHARED 0x04
+
+typedef struct mstxMemPermissionsAssignRegionsDesc_t {
+    uint32_t flags;
+    mstxMemRegionRef_t region;
+} mstxMemPermissionsAssignRegionsDesc_t;
+
+typedef struct mstxMemPermissionsAssignBatch_t {
+    size_t regionCount;
+    mstxMemPermissionsAssignRegionsDesc_t const *regionDescArray;
+} mstxMemPermissionsAssignBatch_t;
+
 /**
  * @ingroup MSTX
  * @brief mstx mark
@@ -159,6 +174,14 @@ MSTX_DECLSPEC void mstxMemRegionsRegister(mstxDomainHandle_t domain, mstxMemRegi
  * @param desc - description of a batch of region references
  */
 MSTX_DECLSPEC void mstxMemRegionsUnregister(mstxDomainHandle_t domain, mstxMemRegionsUnregisterBatch_t const *desc);
+
+/**
+ * @ingroup MSTX
+ * @brief Change the permissions of a region of process virtual memory
+ * @param domain - domain the suballocations belongs to
+ * @param desc - description of a batch of permission descriptions assigned to region references
+ */
+MSTX_DECLSPEC void mstxMemPermissionsAssign(mstxDomainHandle_t domain, mstxMemPermissionsAssignBatch_t const *desc);
 
 /**
  * @brief mstx create a domain

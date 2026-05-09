@@ -69,6 +69,7 @@ typedef struct MstxContext_t {
     mstxMemHeapUnregisterFunc mstxMemHeapUnregisterPtr;
     mstxMemRegionsRegisterFunc mstxMemRegionsRegisterPtr;
     mstxMemRegionsUnregisterFunc mstxMemRegionsUnregisterPtr;
+    mstxMemPermissionsAssignFunc mstxMemPermissionsAssignPtr;
 
     mstxFuncPointer* funcTableCore[MSTX_API_CORE_SIZE + 1];
     mstxFuncPointer* funcTableCore2[MSTX_API_CORE2_SIZE + 1];
@@ -96,6 +97,7 @@ __attribute__((visibility("hidden"))) __attribute__ ((weak)) MstxContext_t g_mst
     mstxMemHeapUnregisterInit,
     mstxMemRegionsRegisterInit,
     mstxMemRegionsUnregisterInit,
+    mstxMemPermissionsAssignInit,
 
     // function pointers
     {
@@ -123,6 +125,7 @@ __attribute__((visibility("hidden"))) __attribute__ ((weak)) MstxContext_t g_mst
         (mstxFuncPointer*)&g_mstxContext.mstxMemHeapUnregisterPtr,
         (mstxFuncPointer*)&g_mstxContext.mstxMemRegionsRegisterPtr,
         (mstxFuncPointer*)&g_mstxContext.mstxMemRegionsUnregisterPtr,
+        (mstxFuncPointer*)&g_mstxContext.mstxMemPermissionsAssignPtr,
         0
     }
 };
@@ -232,6 +235,9 @@ MSTX_INNER_FUNC_DEFINE void refreshUninitMstxCoreMemFuncPtr(int forceNull)
     }
     if ((g_mstxContext.mstxMemRegionsUnregisterPtr == mstxMemRegionsUnregisterInit) || forceNull == 1) {
         g_mstxContext.mstxMemRegionsUnregisterPtr = (mstxMemRegionsUnregisterFunc)0;
+    }
+    if ((g_mstxContext.mstxMemPermissionsAssignPtr == mstxMemPermissionsAssignInit) || forceNull == 1) {
+        g_mstxContext.mstxMemPermissionsAssignPtr = (mstxMemPermissionsAssignFunc)0;
     }
 }
 
