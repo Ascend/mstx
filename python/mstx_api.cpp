@@ -28,60 +28,87 @@ private:
     PyThreadState* tstate;
 };
 
-void ParseArgs(PyObject *args, PyObject *kwds, char *&message, aclrtStream &stream)
+bool ParseArgs(PyObject *args, PyObject *kwds, const char*& message, PyObject*& py_stream)
 {
     message = nullptr;
-    stream = nullptr;
-    static char arg1[] = "message";
-    static char arg2[] = "stream";
-    static char *kwlist[] = {arg1, arg2, nullptr};
-    PyArg_ParseTupleAndKeywords(args, kwds, "|sO", kwlist, &message, &stream);
+    py_stream = Py_None;
+
+    static char* kwlist[] = { "message", "stream", nullptr };
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "|sO", kwlist, &message, &py_stream)) {
+        return false;
+    }
+    return true;
 }
 
 PyObject *WrapMstxMarkA(PyObject *self, PyObject *args, PyObject *kwds)
 {
-    char *message;
-    aclrtStream stream;
-    ParseArgs(args, kwds, message, stream);
+    const char *message;
+    PyObject *py_stream;
 
-    // 检查stream对象是否为None
-    if (stream == Py_None) {
-        stream = nullptr;
+    if (!ParseArgs(args, kwds, message, py_stream)) {
+        return NULL;
+    }
+
+    aclrtStream stream = nullptr;
+    if (py_stream != Py_None) {
+        void* ptr = reinterpret_cast<void*>(PyLong_AsVoidPtr(py_stream));
+        stream = static_cast<aclrtStream>(ptr);
+    }
+    if (!mstxMarkA) {
+        Py_RETURN_NONE;
     }
     {
         GILCtrl gilCtrl;
         mstxMarkA(message, stream);
     }
+
     Py_RETURN_NONE;
 }
 
 PyObject *WrapMstxRangeStartA(PyObject *self, PyObject *args, PyObject *kwds)
 {
-    char *message;
-    aclrtStream stream;
-    ParseArgs(args, kwds, message, stream);
+    const char* message = nullptr;
+    PyObject *py_stream = Py_None;
+
+    if (!ParseArgs(args, kwds, message, py_stream)) {
+        return NULL;
+    }
+
+    aclrtStream stream = nullptr;
+    if (py_stream != Py_None) {
+        void* ptr = reinterpret_cast<void*>(PyLong_AsVoidPtr(py_stream));
+        stream = static_cast<aclrtStream>(ptr);
+    }
+    if (!mstxRangeStartA) {
+        return Py_BuildValue("I", 0);
+    }
     mstxRangeId ret;
     {
         GILCtrl gilCtrl;
-        // 检查stream对象是否为None
-        if (stream == Py_None) {
-            stream = nullptr;
-        }
         ret = mstxRangeStartA(message, stream);
     }
+
     return Py_BuildValue("I", ret);
 }
 
 PyObject *WrapMstxRangeEnd(PyObject *self, PyObject *args, PyObject *kwds)
 {
-    mstxRangeId rangeId = 0;
+    uint32_t rangeId = 0;
     static char arg1[] = "rangeId";
     static char *kwlist[] = {arg1, nullptr};
-    PyArg_ParseTupleAndKeywords(args, kwds, "I", kwlist, &rangeId);
+
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "|I", kwlist, &rangeId)) {
+        return NULL;
+    }
+    if (!mstxRangeEnd) {
+        Py_RETURN_NONE;
+    }
     {
         GILCtrl gilCtrl;
-        mstxRangeEnd(rangeId);
+        mstxRangeEnd(static_cast<mstxRangeId>(rangeId));
     }
+
     Py_RETURN_NONE;
 }
 
