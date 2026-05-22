@@ -6,7 +6,7 @@ project(mstx VERSION 26.0.0)
 get_filename_component(ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
 get_filename_component(THIRDPARTY_PATH thirdparty/ ABSOLUTE)
 get_filename_component(MSTX_HEADER c/include/ ABSOLUTE)
-
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_FLAGS "-std=c++11")
 
 # 检查是否可用 ccache
@@ -30,7 +30,7 @@ endif()
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_SOURCE_DIR}/output CACHE STRING "install prefix" FORCE)
     message(STATUS "No install prefix selected, default to ${CMAKE_INSTALL_PREFIX}")
-endif() 
+endif()
 
 # never install gtest to output path
 set(INSTALL_GTEST OFF)
