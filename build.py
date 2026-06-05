@@ -22,6 +22,7 @@ import os
 import shutil
 import subprocess
 import sys
+import sysconfig
 import traceback
 from pathlib import Path
 
@@ -68,7 +69,7 @@ class BuildManager:
         test_build_path = Path(f"{unit_test_build_dir}_{lang.lower()}")
         test_build_path.mkdir(exist_ok=True)
 
-        self._execute_command(["cmake", "..", "-DBUILD_TESTS=ON", f"-DLANG={lang}", "-DCMAKE_BUILD_TYPE=Debug"],
+        self._execute_command(["cmake", "..", "-DBUILD_TESTS=ON", f"-DLANG={lang}", "-DCMAKE_BUILD_TYPE=Debug", "-DPython_ROOT_DIR=" + sysconfig.get_config_var("prefix"), "-DPython_EXECUTABLE=" + sys.executable],
                               cwd=str(test_build_path))
         self._execute_command(["make", "-j", str(self.build_jobs)],
                               cwd=str(test_build_path))
@@ -121,33 +122,33 @@ class BuildManager:
         logging.info("Testing Python without init")
         env = os.environ.copy()
         env["PYTHONPATH"] = base_pythonpath
-        self._execute_command(["pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
         env["LD_LIBRARY_PATH"] = lib_path + os.pathsep + os.environ.get('LD_LIBRARY_PATH', '')
-        self._execute_command(["pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
 
         logging.info("Testing Python init with preload")
         env = os.environ.copy()
         env["LD_PRELOAD"] = "./test/c/libinjection_test.so"
         env["PYTHONPATH"] = base_pythonpath
-        self._execute_command(["pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
         env["LD_LIBRARY_PATH"] = lib_path + os.pathsep + os.environ.get('LD_LIBRARY_PATH', '')
-        self._execute_command(["pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
 
         logging.info("Testing Python init with normal env")
         env = os.environ.copy()
         env["MSTX_INJECTION_PATH"] = cwd + "/test/c/libinjection_test.so"
         env["PYTHONPATH"] = base_pythonpath
-        self._execute_command(["pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
         env["LD_LIBRARY_PATH"] = lib_path + os.pathsep + os.environ.get('LD_LIBRARY_PATH', '')
-        self._execute_command(["pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_with_init.py"], cwd=cwd, env=env)
 
         logging.info("Testing Python init with abnormal env")
         env = os.environ.copy()
         env["MSTX_INJECTION_PATH"] = "1234"
         env["PYTHONPATH"] = base_pythonpath
-        self._execute_command(["pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
         env["LD_LIBRARY_PATH"] = lib_path + os.pathsep + os.environ.get('LD_LIBRARY_PATH', '')
-        self._execute_command(["pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
+        self._execute_command([sys.executable, "-m", "pytest", "./test/python/test_mstx_without_init.py"], cwd=cwd, env=env)
 
     def run(self):
         os.chdir(self.project_root)
