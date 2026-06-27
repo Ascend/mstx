@@ -1,4 +1,4 @@
-# mstxDomainCreateA<a id="mstxDomainCreateA"></a>
+# mstxDomainCreateA
 
 **Product Support<a id="section8178181118225"></a>**
 

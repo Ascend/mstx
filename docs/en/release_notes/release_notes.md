@@ -1,6 +1,6 @@
 # MindStudio Tools Extension Library Release Notes
 
-## Version Compatibility
+## Version Pairing Guide
 
 ### Product Version Information
 
@@ -16,7 +16,7 @@
 | 26.0.0 | 9.0.0 or later | Python 3.11 or later |
 | 8.3.0 | 8.2.RC1 or later | Python 3.11 or later |
 
-## Version Compatibility
+## Version Compatibility Statement
 
 No compatibility changes.
 

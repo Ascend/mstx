@@ -56,11 +56,9 @@ If 0 is returned, it indicates failure.
     mstxRangeId id = mstxRangeStartA(message, NULL);
     ...
     // Run op
-    if
-    (!opRunner.RunOp()) {
-    ERROR_LOG("Run
-    op failed");
-    return false;
+    if (!opRunner.RunOp()) {
+        ERROR_LOG("Run op failed");
+        return false;
     }
     mstxRangeEnd(id);
     ...

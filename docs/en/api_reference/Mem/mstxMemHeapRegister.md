@@ -17,7 +17,7 @@ Registers a memory pool. When calling this API to register a memory pool, the us
 
 **Prototype<a id="zh-cn_topic_0000002216005989_section1121883194711"></a>**
 
-```python
+```c
 mstxMemHeapHandle_t mstxMemHeapRegister(mstxDomainHandle_t domain, mstxMemHeapDesc_t const *desc)
 ```
 
@@ -96,7 +96,7 @@ mstxMemVirtualRangeDesc_t rangeDesc = {};
     rangeDesc.deviceId = deviceId;       // Device ID
     rangeDesc.ptr = gm;                  // Start address of the registered memory pool gm
     rangeDesc.size = 1024;               // Memory pool size
-    heapDesc.typeSpecificDesc = &rangeDesc;
     mstxMemHeapDesc_t heapDesc{};
+    heapDesc.typeSpecificDesc = &rangeDesc;
     mstxMemHeapHandle_t memPool = mstxMemHeapRegister(globalDomain, &heapDesc); // Register memory pool
 ```

@@ -37,5 +37,5 @@ Enter "y", and the package will automatically complete the upgrade operation.
 To uninstall, use the following command:
 
 ```sh
-pip3 uninstall mstx-xxxxx.whl 
+pip3 uninstall mstx
 ```

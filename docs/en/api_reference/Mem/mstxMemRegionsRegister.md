@@ -70,7 +70,7 @@ None
 
 **Example<a id="zh-cn_topic_0000002180759810_section377820328555"></a>**
 
-```shell
+```c
 mstxMemRegionsRegisterBatch_t regionsDesc{};
 regionsDesc.heap = memPool;
 regionsDesc.regionType = MSTX_MEM_TYPE_VIRTUAL_ADDRESS;

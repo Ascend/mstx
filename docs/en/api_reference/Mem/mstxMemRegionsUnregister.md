@@ -78,7 +78,7 @@ None
 
 **Example<a id="zh-cn_topic_0000002180600118_section377820328555"></a>**
 
-```python
+```c
 mstxMemRegionsUnregisterBatch_t refsDesc = {}
 refsDesc.refCount = 1;
 refsDesc.refArray = regionRef;
