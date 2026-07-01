@@ -20,20 +20,19 @@
 class GILCtrl {
 public:
     GILCtrl() : tstate(PyEval_SaveThread()) {} // 释放GIL
-    ~GILCtrl()
-    {
-        PyEval_RestoreThread(tstate);   // 恢复GIL
+    ~GILCtrl() {
+        PyEval_RestoreThread(tstate); // 恢复GIL
     }
+
 private:
-    PyThreadState* tstate;
+    PyThreadState *tstate;
 };
 
-bool ParseArgs(PyObject *args, PyObject *kwds, const char*& message, PyObject*& py_stream)
-{
+bool ParseArgs(PyObject *args, PyObject *kwds, const char *&message, PyObject *&py_stream) {
     message = nullptr;
     py_stream = Py_None;
 
-    static char* kwlist[] = { "message", "stream", nullptr };
+    static char *kwlist[] = {"message", "stream", nullptr};
 
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "|sO", kwlist, &message, &py_stream)) {
         return false;
@@ -41,8 +40,7 @@ bool ParseArgs(PyObject *args, PyObject *kwds, const char*& message, PyObject*& 
     return true;
 }
 
-PyObject *WrapMstxMarkA(PyObject *self, PyObject *args, PyObject *kwds)
-{
+PyObject *WrapMstxMarkA(PyObject *self, PyObject *args, PyObject *kwds) {
     const char *message;
     PyObject *py_stream;
 
@@ -52,7 +50,18 @@ PyObject *WrapMstxMarkA(PyObject *self, PyObject *args, PyObject *kwds)
 
     aclrtStream stream = nullptr;
     if (py_stream != Py_None) {
-        void* ptr = reinterpret_cast<void*>(PyLong_AsVoidPtr(py_stream));
+        // 校验输入必须是整数
+        if (!PyLong_Check(py_stream)) {
+            PyErr_SetString(PyExc_TypeError, "stream must be an integer (aclrtStream handle) or None");
+            return nullptr;
+        }
+
+        unsigned long long handle_val = PyLong_AsUnsignedLongLong(py_stream);
+        if (PyErr_Occurred()) {
+            return nullptr;
+        }
+
+        void *ptr = reinterpret_cast<void *>(handle_val);
         stream = static_cast<aclrtStream>(ptr);
     }
     if (!mstxMarkA) {
@@ -66,9 +75,8 @@ PyObject *WrapMstxMarkA(PyObject *self, PyObject *args, PyObject *kwds)
     Py_RETURN_NONE;
 }
 
-PyObject *WrapMstxRangeStartA(PyObject *self, PyObject *args, PyObject *kwds)
-{
-    const char* message = nullptr;
+PyObject *WrapMstxRangeStartA(PyObject *self, PyObject *args, PyObject *kwds) {
+    const char *message = nullptr;
     PyObject *py_stream = Py_None;
 
     if (!ParseArgs(args, kwds, message, py_stream)) {
@@ -77,7 +85,18 @@ PyObject *WrapMstxRangeStartA(PyObject *self, PyObject *args, PyObject *kwds)
 
     aclrtStream stream = nullptr;
     if (py_stream != Py_None) {
-        void* ptr = reinterpret_cast<void*>(PyLong_AsVoidPtr(py_stream));
+        // 校验输入必须是整数
+        if (!PyLong_Check(py_stream)) {
+            PyErr_SetString(PyExc_TypeError, "stream must be an integer (aclrtStream handle) or None");
+            return nullptr;
+        }
+
+        unsigned long long handle_val = PyLong_AsUnsignedLongLong(py_stream);
+        if (PyErr_Occurred()) {
+            return nullptr;
+        }
+
+        void *ptr = reinterpret_cast<void *>(handle_val);
         stream = static_cast<aclrtStream>(ptr);
     }
     if (!mstxRangeStartA) {
@@ -92,8 +111,7 @@ PyObject *WrapMstxRangeStartA(PyObject *self, PyObject *args, PyObject *kwds)
     return Py_BuildValue("I", ret);
 }
 
-PyObject *WrapMstxRangeEnd(PyObject *self, PyObject *args, PyObject *kwds)
-{
+PyObject *WrapMstxRangeEnd(PyObject *self, PyObject *args, PyObject *kwds) {
     uint32_t rangeId = 0;
     static char arg1[] = "rangeId";
     static char *kwlist[] = {arg1, nullptr};
@@ -112,8 +130,7 @@ PyObject *WrapMstxRangeEnd(PyObject *self, PyObject *args, PyObject *kwds)
     Py_RETURN_NONE;
 }
 
-PyObject *WrapMstxGetToolId(PyObject *self, PyObject *args, PyObject *kwds)
-{
+PyObject *WrapMstxGetToolId(PyObject *self, PyObject *args, PyObject *kwds) {
     uint64_t id = 0;
     {
         GILCtrl gilCtrl;
