@@ -77,5 +77,5 @@ regionsDesc.regionType = MSTX_MEM_TYPE_VIRTUAL_ADDRESS;
 regionsDesc.regionCount = 1;
 regionsDesc.regionDescArray = rangesDesc;
 regionsDesc.regionHandleArrayOut = regionHandles;
-mstxMemRegionsRegister(globalDomain, regionsDesc);              // Secondary allocation registrationry Allocation Registration
+mstxMemRegionsRegister(globalDomain, regionsDesc);              // Secondary allocation Registration
 ```

@@ -28,3 +28,4 @@ Replace `${INSTALL_DIR}` with the file storage path after CANN software installa
 |[mstxMemRegionsRegister](./Mem/mstxMemRegionsRegister.md)|Registers secondary allocation of a memory pool.|
 |[mstxMemRegionsUnregister](./Mem/mstxMemRegionsUnregister.md)|Unregisters secondary allocation of a memory pool.|
 |[mstxMemHeapUnregister](./Mem/mstxMemHeapUnregister.md)|When a memory pool is unregistered, the associated regions are also unregistered.|
+|[mstxMemPermissionsAssign](./Mem/mstxMemPermissionsAssign.md)|Specify permissions for a virtual memory region.|
