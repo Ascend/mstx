@@ -23,6 +23,10 @@ public:
     ~GILCtrl() {
         PyEval_RestoreThread(tstate); // 恢复GIL
     }
+    GILCtrl(const GILCtrl &) = delete;
+    GILCtrl &operator=(const GILCtrl &) = delete;
+    GILCtrl(GILCtrl &&) = delete;
+    GILCtrl &operator=(GILCtrl &&) = delete;
 
 private:
     PyThreadState *tstate;
