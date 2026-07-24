@@ -4,7 +4,7 @@
 
 |Product|Supported|
 |--|:-:|
-|Ascend 910_95 AI Processors|√|
+|Atlas 350 accelerator cards|√|
 |Atlas A3 training products/Atlas A3 inference products|√|
 |Atlas A2 training products/Atlas A2 inference products|√|
 |Atlas 200I/500 A2 inference products|√|
@@ -21,25 +21,25 @@ Invalid value 0, indicating that no tool has launched the program.
 #define MSTX_TOOL_INVALID_ID 0x0
 ```  
 
-0x1000, indicating that the program is launched by [msProf](https://www.hiascend.com/document/detail/en/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_0010.html) or [MSPTI](https://www.hiascend.com/document/detail/en/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_1153.html)
+0x1000, indicating that the program is launched by [msProf](https://www.hiascend.com/document/detail/en/CANNCommunityEdition/900/devaids/Profiling/atlasprofiling_16_0010.html) or [MSPTI](https://www.hiascend.com/document/detail/en/CANNCommunityEdition/900/devaids/Profiling/atlasprofiling_16_0031.html)
 
 ```c
 #define MSTX_TOOL_MSPROF_ID 0x1000
 ```
 
-0x1001, indicating that the program is launched by the [msProf](https://www.hiascend.com/document/detail/en/canncommercial/83RC1/devaids/optool/atlasopdev_16_0082.html) tool
+0x1001, indicating that the program is launched by the [msOpProf](https://gitcode.com/Ascend/msopprof/blob/26.0.0/docs/en/user_guide/msopprof_user_guide.md) tool
 
 ```c
 #define MSTX_TOOL_MSOPPROF_ID 0x1001
 ```     
 
-0x1002, indicating that the program is launched by the [msSanitizer](https://www.hiascend.com/document/detail/en/canncommercial/83RC1/devaids/optool/atlasopdev_16_0039.html) tool
+0x1002, indicating that the program is launched by the [msSanitizer](https://gitcode.com/Ascend/mssanitizer/blob/26.0.0/docs/en/user_guide/mssanitizer_user_guide.md) tool
 
 ```c
 #define MSTX_TOOL_MSSANITIZER_ID 0x1002  
 ```
 
-0x1003, indicating that the program is launched by the [msLeaks Memory Leak Detection Tool](https://www.hiascend.com/document/detail/en/canncommercial/83RC1/devaids/msleaks/atlas_msleaks_0001.html)
+0x1003, indicating that the program is launched by the [Memory Profiler](https://gitcode.com/Ascend/msmemscope/blob/26.0.0/docs/en/quick_start.md)
 
 ```c
 #define MSTX_TOOL_MSLEAKS_ID 0x1003      

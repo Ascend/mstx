@@ -4,7 +4,7 @@
 
 |Product|Supported|
 |--|:-:|
-|Ascend 910_95 AI Processors|√|
+|Atlas 350 accelerator cards|√|
 |Atlas A3 training products/Atlas A3 inference products|√|
 |Atlas A2 training products/Atlas A2 inference products|√|
 |Atlas 200I/500 A2 inference products|√|
