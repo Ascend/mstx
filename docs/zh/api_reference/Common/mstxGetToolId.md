@@ -21,25 +21,25 @@
 #define MSTX_TOOL_INVALID_ID 0x0
 ```  
 
-0x1000，表示程序由《[msprof模型调优工具](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_0010.html)》或《[MSPTI](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_1153.html)》工具拉起
+0x1000，表示程序由《[msprof模型调优工具](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/devaids/Profiling/atlasprofiling_16_0010.html)》或《[MSPTI](https://www.hiascend.com/document/detail/zh/CANNCommunityEdition/910/devaids/Profiling/atlasprofiling_16_0031.html)》工具拉起
 
 ```c
 #define MSTX_TOOL_MSPROF_ID 0x1000
 ```
 
-0x1001，表示程序由[算子调优（msProf）](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/optool/atlasopdev_16_0082.html)工具拉起
+0x1001，表示程序由[算子调优（msProf）](https://gitcode.com/Ascend/msopprof/blob/26.1.0/docs/zh/user_guide/msopprof_user_guide.md)工具拉起
 
 ```c
 #define MSTX_TOOL_MSOPPROF_ID 0x1001
 ```     
 
-0x1002，表示程序由[异常检测（msSanitizer）](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/optool/atlasopdev_16_0039.html)工具拉起
+0x1002，表示程序由[异常检测（msSanitizer）](https://gitcode.com/Ascend/mssanitizer/blob/26.1.0/docs/zh/user_guide/mssanitizer_user_guide.md)工具拉起
 
 ```c
 #define MSTX_TOOL_MSSANITIZER_ID 0x1002  
 ```
 
-0x1003，表示程序由《[msLeaks内存泄漏检测工具](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/msleaks/atlas_msleaks_0001.html)》拉起
+0x1003，表示程序由《[msLeaks内存泄漏检测工具](https://gitcode.com/Ascend/msmemscope/blob/26.1.0/docs/zh/quick_start/quick_start.md)》拉起
 
 ```c
 #define MSTX_TOOL_MSLEAKS_ID 0x1003      
