@@ -1,0 +1,23 @@
+{
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/build_ut/**": true,
+    "**/build_ut_c/**": true,
+    "**/build_ut_cpp/**": true,
+    "**/output/**": true,
+    "**/artifacts/**": true,
+    "**/thirdparty/**": true
+  },
+  "search.exclude": {
+    "**/build": true,
+    "**/build_ut": true,
+    "**/build_ut_c": true,
+    "**/build_ut_cpp": true,
+    "**/output": true,
+    "**/artifacts": true,
+    "**/thirdparty": true
+  },
+  "git.detectSubmodules": false,
+  "git.autoRepositoryDetection": false,
+  "C_Cpp.intelliSenseEngine": "disabled"
+}

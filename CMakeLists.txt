@@ -1,7 +1,13 @@
 cmake_minimum_required(VERSION 3.16)
 
 set(CMAKE_CXX_COMPILER "g++")
+
 project(mstx VERSION 26.0.0)
+
+# 默认构建类型为 Release，避免影响原有 build.py 构建
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif()
 
 get_filename_component(ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}" ABSOLUTE)
 get_filename_component(THIRDPARTY_PATH thirdparty/ ABSOLUTE)

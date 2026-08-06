@@ -1,11 +1,32 @@
-.vscode
+# Build outputs
 build/
 build_ut/
 build_ut_c/
 build_ut_cpp/
 output/
-*.so
+artifacts/
 cmake-build-debug
-.codemate/
 
+# Compiled libraries
+*.so
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+dist/
+*.egg-info/
+.venv/
+
+# Cache directories
+.cache/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Devcontainer generated
+.devcontainer/.host-gitconfig
+
+# Codemate
+.codemate/
 .codemate

@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build: Release Mode",
+      "type": "shell",
+      "command": "python3 ${workspaceFolder}/build.py",
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Build: Debug Mode",
+      "type": "shell",
+      "command": "python3 build.py -e only_down_deps=true && mkdir -p build && cd build && cmake .. -DCMAKE_BUILD_TYPE=Debug && make -j$(nproc)",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": ["$gcc"],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Test: Run Unit Tests",
+      "type": "shell",
+      "command": "python3 build.py test local",
+      "group": "test",
+      "presentation": { "reveal": "always", "panel": "shared" }
+    },
+    {
+      "label": "Clean: All Workspace",
+      "type": "shell",
+      "command": "rm -rf build build_ut build_ut_c build_ut_cpp output artifacts",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "shared" }
+    }
+  ]
+}

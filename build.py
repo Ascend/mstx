@@ -28,7 +28,6 @@ from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-
 class BuildManager:
     """
     统一构建管理：依赖拉取 → CMake 配置 → 并行编译 → 安装 / 测试。
@@ -234,6 +233,16 @@ class BuildManager:
         if 'local' not in self.parsed_arguments.command:
             from download_dependencies import DependencyManager
             DependencyManager(self.parsed_arguments).run()
+
+        # 支持 only_down_deps 参数：仅下载依赖，不继续编译（IDE Debug 构建使用）
+        extra_options = {}
+        for option in self.parsed_arguments.extra:
+            key, _, value = option.partition('=')
+            extra_options[key] = value
+
+        if extra_options.get('only_down_deps') == 'true':
+            logging.info("only_down_deps=true, exiting after dependency download.")
+            return
 
         if 'test' in self.parsed_arguments.command:
             # -------------------- 单元测试 --------------------

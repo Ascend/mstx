@@ -1,3 +1,4 @@
 [submodule "thirdparty/googletest"]
 	path = thirdparty/googletest
 	url = https://gitcode.com/GitHub_Trending/go/googletest.git
+	ignore = all
