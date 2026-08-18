@@ -1,12 +1,21 @@
 from setuptools import setup
 from setuptools.command.install import install
-import subprocess
-import os
-import re
-from packaging.tags import sys_tags
 import os
 
-tag = next(sys_tags())
+try:
+    from packaging.tags import sys_tags
+    _has_packaging = True
+except ImportError:
+    _has_packaging = False
+
+def _get_plat_name(name):
+    if not _has_packaging:
+        return name
+    try:
+        return next(sys_tags()).platform
+    except Exception:
+        return name
+
 
 class CustomInstall(install):
     def run(self):
@@ -32,11 +41,11 @@ setup(
     url = 'https://gitcode.com/Ascend/mstx',
     options={
         'bdist_wheel':{
-            'plat_name': tag.platform}},
+            'plat_name': _get_plat_name('')}},
     packages = ['lib64', 'include'],
     cmdclass={"install": CustomInstall},
     include_package_data = True,
-    license= 'MIT',
+    license= 'Mulan PSL v2',
     classifiers = [
         'Programming Language :: Python :: 3',
         'Operating System :: Linux',
