@@ -21,7 +21,7 @@
     {
       "label": "Test: Run Unit Tests",
       "type": "shell",
-      "command": "python3 build.py test local",
+      "command": "python3 build.py test",
       "group": "test",
       "presentation": { "reveal": "always", "panel": "shared" }
     },
