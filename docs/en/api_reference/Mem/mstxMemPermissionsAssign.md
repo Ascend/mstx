@@ -1,4 +1,4 @@
-# mstxMemHeapRegister<a id="mstxMemHeapRegister"></a>
+# mstxMemPermissionsAssign<a id="mstxMemPermissionsAssign"></a>
 
 **Supported Products<a id="section8178181118225"></a>**
 
@@ -13,17 +13,17 @@
 
 **Function<a id="zh-cn_topic_0000002216005989_section20806203412478"></a>**
 
-Registers a memory pool. When calling this API to register a memory pool, the user must ensure that the memory has been allocated in advance.
+Specifies read, write, and share access permissions for a virtual memory interval. Before specifying permissions, ensure that this interval has been registered as a region.
 
 **Prototype<a id="zh-cn_topic_0000002216005989_section1121883194711"></a>**
 
 ```c
-mstxMemHeapHandle_t mstxMemHeapRegister(mstxDomainHandle_t domain, mstxMemHeapDesc_t const *desc)
+void mstxMemPermissionsAssign(mstxDomainHandle_t domain, mstxMemPermissionsAssignBatch_t const *desc);
 ```
 
 **Parameter Description<a id="zh-cn_topic_0000002216005989_section11506138144714"></a>**
 
-**Table 1**  Parameter description
+**Table 1** Parameter description
 
 <a name="zh-cn_topic_0000002216005989_table827101275518"></a>
 <table><thead align="left"><tr id="zh-cn_topic_0000002216005989_row429121265517"><th class="cellrowborder" valign="top" width="16.881688168816883%" id="mcps1.2.4.1.1"><p id="zh-cn_topic_0000002216005989_p1329121214558"><a name="zh-cn_topic_0000002216005989_p1329121214558"></a><a name="zh-cn_topic_0000002216005989_p1329121214558"></a>Parameter</p>
@@ -48,38 +48,40 @@ mstxMemHeapHandle_t mstxMemHeapRegister(mstxDomainHandle_t domain, mstxMemHeapDe
 </td>
 <td class="cellrowborder" valign="top" width="71.71717171717171%" headers="mcps1.2.4.1.3 ">
 
-<pre class="screen" id="zh-cn_topic_0000002216005989_screen47021458121411"><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a>typedef enum mstxMemHeapUsageType {
-    /* @brief This heap memory is used as a memory pool
-     * Heap memory registered using this usage type must be accessed after secondary allocation registration
-     */
-    MSTX_MEM_HEAP_USAGE_TYPE_SUB_ALLOCATOR = 0,
-} mstxMemHeapUsageType;
-
-/** @brief Heap memory type
-
- * The "type" here refers to the method used to describe the heap memory pointer. Currently, only linearly arranged memory is supported.
- * memory, but the capability to support more memory types in the future is reserved here. For example, some APIs return
- * multiple handles to describe a memory range, or some high-dimensional memory requires stride, tiling, or
- * interlace for description.
+<pre class="screen" id="zh-cn_topic_0000002216005989_screen47021458121411"><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a>
+/** @brief No access permission for this memory
  */
-typedef enum mstxMemType {
-    /** @brief Standard linearly laid out virtual memory
-      * In this case, mstxMemHeapRegister receives a description of the mstxMemVirtualRangeDesc_t type.
-      */
-    MSTX_MEM_TYPE_VIRTUAL_ADDRESS = 0,
-} mstxMemType;
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_NONE 0x00
 
-typedef struct mstxMemVirtualRangeDesc_t {
-    uint32_t deviceId;  // Device ID corresponding to the memory region
-    void const *ptr;  // Start address of the memory region
-    uint64_t size;  // Length of the memory region
-} mstxMemVirtualRangeDesc_t;
+/** @brief This memory is readable
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_READ 0x01
 
-typedef struct mstxMemHeapDesc_t {
-    mstxMemHeapUsageType usage;  // Usage mode of the heap memory
-    mstxMemType type;  // Type of the heap memory
-    void const *typeSpecificDesc;  // Description information of the heap memory under the specified memory type
-} mstxMemHeapDesc_t;</pre>
+/** @brief This memory is writable
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_WRITE 0x02
+
+/** @brief This memory can be shared across multiple devices
+ */
+#define MSTX_MEM_PERMISSIONS_REGION_FLAGS_SHARED 0x04
+
+/** @brief Describes the memory permissions assigned to a region
+  * @member flags - Permission flags represented by MSTX_MEM_PERMISSIONS_REGION_FLAGS_*
+  * @member region - Reference to a registered virtual memory region
+  */
+typedef struct mstxMemPermissionsAssignRegionsDesc_t {
+    uint32_t flags;
+    mstxMemRegionRef_t region;
+} mstxMemPermissionsAssignRegionsDesc_t;
+
+/** @brief Used to describe memory permissions for multiple regions
+  * @member regionCount - Length of the regionDescArray
+  * @member regionDescArray - Array of permission descriptors
+  */
+typedef struct mstxMemPermissionsAssignBatch_t {
+    size_t regionCount;
+    mstxMemPermissionsAssignRegionsDesc_t const *regionDescArray;
+} mstxMemPermissionsAssignBatch_t;</pre>
 </td>
 </tr>
 </tbody>
@@ -87,17 +89,25 @@ typedef struct mstxMemHeapDesc_t {
 
 **Returns<a id="zh-cn_topic_0000002216005989_section16621124213476"></a>**
 
-Handle corresponding to the memory pool.
+None.
 
 **Example<a id="zh-cn_topic_0000002216005989_section377820328555"></a>**
 
 ```c
-mstxMemVirtualRangeDesc_t rangeDesc = {};
-    rangeDesc.deviceId = deviceId;       // Device ID
-    rangeDesc.ptr = gm;                  // Start address of the registered memory pool gm
-    rangeDesc.size = 1024;               // Memory pool size
+// Assume handles have been initialized by mstxMemRegionsRegister
+mstxMemRegionHandle_t handles[2];
 
-    mstxMemHeapDesc_t heapDesc{};
-    heapDesc.typeSpecificDesc = &rangeDesc;
-    mstxMemHeapHandle_t memPool = mstxMemHeapRegister(globalDomain, &heapDesc); // Register memory pool
+mstxMemPermissionsAssignRegionsDesc_t perms[2];
+mstxMemPermissionsAssignBatch_t permBatch{};
+perms[0].flags = MSTX_MEM_PERMISSIONS_REGION_FLAGS_READ;
+perms[0].region.refType = MSTX_MEM_REGION_REF_TYPE_HANDLE;
+perms[0].region.handle = handles[0];
+perms[1].flags = MSTX_MEM_PERMISSIONS_REGION_FLAGS_WRITE;
+perms[1].region.refType = MSTX_MEM_REGION_REF_TYPE_HANDLE;
+perms[1].region.handle = handles[0];
+permBatch.regionCount = 2;
+permBatch.regionDescArray = perms;
+
+// Assume globalDomain has been initialized by mstxMemRegionsRegister
+mstxMemPermissionsAssign(globalDomain, &permBatch);
 ```
