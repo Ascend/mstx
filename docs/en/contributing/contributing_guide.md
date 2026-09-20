@@ -4,7 +4,7 @@
 
 ## 1. Contribution Workflow and Specifications
 
-Before participating in development, familiarize yourself with the contribution workflow and guidelines. For details, see [Contribution Workflow and Guidelines](https://gitcode.com/Ascend/msot/blob/master/docs/en/common/contribute_workflow.md).
+Before participating in development, familiarize yourself with the contribution workflow and guidelines. For details, see [Contribution Workflow and Guidelines](https://gitcode.com/Ascend/msot/blob/26.2.0/docs/en/common/contribute_workflow.md).
 
 ## 2. Development Guide
 

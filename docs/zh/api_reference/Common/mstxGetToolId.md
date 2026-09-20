@@ -3,22 +3,22 @@
 **产品支持情况<a id="section8178181118225"></a>**
 
 <!-- npu="950" id1 -->
-- Ascend 950PR&950DT 系列产品：支持
+- Ascend 950PR&950DT系列产品：支持
 <!-- end id1 -->
 <!-- npu="A3" id2 -->
-- Atlas A3 系列产品：支持
+- Atlas A3系列产品：支持
 <!-- end id2 -->
 <!-- npu="910b" id3 -->
-- Atlas A2 系列产品：支持
+- Atlas A2系列产品：支持
 <!-- end id3 -->
 <!-- npu="310b" id4 -->
-- Atlas 200I/500 A2 推理产品：支持
+- Atlas 200I/500 A2推理产品：支持
 <!-- end id4 -->
 <!-- npu="310p" id5 -->
-- Atlas 推理系列产品：支持
+- Atlas推理系列产品：支持
 <!-- end id5 -->
 <!-- npu="910" id6 -->
-- Atlas 训练系列产品：支持
+- Atlas训练系列产品：支持
 <!-- end id6 -->
 
 **功能说明<a id="zh-cn_topic_0000002446914857_section20806203412478"></a>**
@@ -31,19 +31,19 @@
 #define MSTX_TOOL_INVALID_ID 0x0
 ```  
 
-0x1000，表示程序由《[msprof模型调优工具](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_0010.html)》或《[MSPTI](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/Profiling/atlasprofiling_16_1153.html)》工具拉起
+0x1000，表示程序由《[msprof模型调优工具](https://gitcode.com/cann/oam-tools/blob/9.2.0/docs/zh/profiling/msprof_cmd/general_collect_commands.md)》或《[MSPTI](https://gitcode.com/Ascend/mspti/blob/26.2.0/docs/zh/user_guide/mspti_user_guide.md)》工具拉起
 
 ```c
 #define MSTX_TOOL_MSPROF_ID 0x1000
 ```
 
-0x1001，表示程序由[算子调优（msProf）](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/optool/atlasopdev_16_0082.html)工具拉起
+0x1001，表示程序由[算子调优（msOpProf）](https://gitcode.com/Ascend/msopprof/blob/26.2.0/docs/zh/user_guide/msopprof_user_guide.md)工具拉起
 
 ```c
 #define MSTX_TOOL_MSOPPROF_ID 0x1001
 ```     
 
-0x1002，表示程序由[异常检测（msSanitizer）](https://www.hiascend.com/document/detail/zh/canncommercial/83RC1/devaids/optool/atlasopdev_16_0039.html)工具拉起
+0x1002，表示程序由[异常检测（msSanitizer）](https://gitcode.com/Ascend/mssanitizer/blob/26.2.0/docs/zh/user_guide/mssanitizer_user_guide.md)工具拉起
 
 ```c
 #define MSTX_TOOL_MSSANITIZER_ID 0x1002  
