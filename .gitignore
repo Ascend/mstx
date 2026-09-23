@@ -5,6 +5,7 @@ build_ut_c/
 build_ut_cpp/
 output/
 artifacts/
+coverage/
 cmake-build-debug
 
 # Compiled libraries

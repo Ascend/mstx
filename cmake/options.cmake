@@ -14,3 +14,9 @@ add_link_options("-pie")
 if(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_link_options("-s")
 endif()
+
+# 单元测试构建时对产品代码（c/、python/）开启覆盖率插桩，产品构建不受影响
+if(BUILD_TESTS)
+    add_compile_options(--coverage)
+    add_link_options(--coverage)
+endif()

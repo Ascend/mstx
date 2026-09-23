@@ -17,7 +17,11 @@ endif()
 
 target_include_directories(mstx_test_${LANG} PUBLIC ${gtest_header} ${MSTX_HEADER})
 target_include_directories(mstx_static_lib_${LANG} PUBLIC ${gtest_header} ${MSTX_HEADER})
-target_link_libraries(mstx_test_${LANG} gtest_main mstx_static_lib_${LANG} dl pthread)
+# gtest 用例通过静态注册生效，必须用 --whole-archive 强制链入静态库，
+# 否则 test_core.cpp 中的用例会被链接器丢弃，导致实际执行 0 个用例。
+target_link_libraries(mstx_test_${LANG} gtest_main
+                      "-Wl,--whole-archive" mstx_static_lib_${LANG} "-Wl,--no-whole-archive"
+                      dl pthread)
 
 add_library(injection_test SHARED injection_stub.cpp)
 
