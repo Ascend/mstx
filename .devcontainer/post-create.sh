@@ -1,5 +1,4 @@
 #!/bin/bash
-# -*- coding: utf-8 -*-
 # -------------------------------------------------------------------------
 # This file is part of the MindStudio project.
 # Copyright (c) 2026 Huawei Technologies Co.,Ltd.
@@ -14,10 +13,6 @@
 # EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT,
 # MERCHANTABILITY OR FIT FOR A PARTICULAR PURPOSE.
 # See the Mulan PSL v2 for more details.
-# -------------------------------------------------------------------------
-# -------------------------------------------------------------------------
-# 容器首次创建后的幂等初始化脚本
-# 所有动作必须幂等，失败不阻塞容器创建
 # -------------------------------------------------------------------------
 set -e
 

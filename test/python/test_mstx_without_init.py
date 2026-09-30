@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
 # -------------------------------------------------------------------------
 # This file is part of the MindStudio project.
 # Copyright (c) 2025 Huawei Technologies Co.,Ltd.
@@ -96,4 +95,3 @@ class TestMstxWithoutInit(unittest.TestCase):
     def test_get_tool_id(self):
         id = mstx.get_tool_id()
         self.assertEqual(id, 0)
-

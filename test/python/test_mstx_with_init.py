@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
 # -------------------------------------------------------------------------
 # This file is part of the MindStudio project.
 # Copyright (c) 2025 Huawei Technologies Co.,Ltd.
@@ -60,7 +59,7 @@ class TestMstxWithInit(unittest.TestCase):
 
         ret = mstx.range_start(message="test01", stream=1)
         self.assertEqual(ret, 123456)
-    
+
     def test_get_tool_id(self):
         id = mstx.get_tool_id()
         self.assertEqual(id, 1234)
