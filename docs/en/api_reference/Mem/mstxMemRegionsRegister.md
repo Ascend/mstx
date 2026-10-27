@@ -3,7 +3,7 @@
 **Supported Products<a id="section8178181118225"></a>**
 
 <!-- npu="950" id1 -->
-- Atlas 950PR and 950DT products: supported
+- Ascend 950PR and 950DT products: supported
 <!-- end id1 -->
 <!-- npu="A3" id2 -->
 - Atlas A3 products: supported
@@ -87,5 +87,5 @@ regionsDesc.regionType = MSTX_MEM_TYPE_VIRTUAL_ADDRESS;
 regionsDesc.regionCount = 1;
 regionsDesc.regionDescArray = rangesDesc;
 regionsDesc.regionHandleArrayOut = regionHandles;
-mstxMemRegionsRegister(globalDomain, &regionsDesc);              // Secondary allocation registrationry Allocation Registration
+mstxMemRegionsRegister(globalDomain, &regionsDesc);              // Secondary allocation registration
 ```

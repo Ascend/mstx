@@ -60,7 +60,7 @@ mstxMemHeapHandle_t mstxMemHeapRegister(mstxDomainHandle_t domain, mstxMemHeapDe
 
 <pre class="screen" id="zh-cn_topic_0000002216005989_screen47021458121411"><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a><a name="zh-cn_topic_0000002216005989_screen47021458121411"></a>typedef enum mstxMemHeapUsageType {
     /* @brief 此堆内存作为内存池使用
-     * 使用此使用方式注册的堆内存，需要使用二次分配注册后才可以访问
+     * 使用此方式注册的堆内存，需要使用二次分配注册后才可以访问
      */
     MSTX_MEM_HEAP_USAGE_TYPE_SUB_ALLOCATOR = 0,
 } mstxMemHeapUsageType;

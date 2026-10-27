@@ -3,7 +3,7 @@
 **Supported Products<a id="section8178181118225"></a>**
 
 <!-- npu="950" id1 -->
-- Atlas 950PR and 950DT products: supported
+- Ascend 950PR and 950DT products: supported
 <!-- end id1 -->
 <!-- npu="A3" id2 -->
 - Atlas A3 products: supported
@@ -92,5 +92,5 @@ None
 mstxMemRegionsUnregisterBatch_t refsDesc = {};
 refsDesc.refCount = 1;
 refsDesc.refArray = regionRef;
-mstxMemRegionsUnregister(globalDomain, &refsDesc);                   // Unregister secondary allocationster Secondary Allocation
+mstxMemRegionsUnregister(globalDomain, &refsDesc);                   // Unregister secondary allocation
 ```
