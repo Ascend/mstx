@@ -3,11 +3,11 @@
 <div align="center">
 <p><b><span style="font-size:24px;">Ascend AI Operator Tool Extension Interface Library</span></b></p>
 
- [![Ask DeepWiki](https://badgen.net/badge/AI问答/DeepWiki/blue)](https://deepwiki.com/mindstudio-docs/master)
- [![Ask ZRead](https://badgen.net/badge/AI问答/ZRead/blue)](https://zread.ai/mindstudio-docs/master)
- [![ReadTheDocs](https://badgen.net/badge/精确搜索/ReadTheDocs/blue)](https://mindstudio-operator-tools-docs.readthedocs.io/zh-cn/latest/)
- [![Community](https://badgen.net/badge/昇腾社区/Community/blue)](https://www.hiascend.com/en/developer/software/mindstudio)
- [![Issues](https://badgen.net/badge/报告问题/Issues/blue)](https://gitcode.com/Ascend/mstx/issues)
+ [![AI Q&A (DeepWiki)](https://badgen.net/badge/AI%20Q%26A/DeepWiki/blue)](https://deepwiki.com/mindstudio-docs/master)
+ [![AI Q&A (ZRead)](https://badgen.net/badge/AI%20Q%26A/ZRead/blue)](https://zread.ai/mindstudio-docs/master)
+ [![Exact Search](https://badgen.net/badge/Exact%20Search/ReadTheDocs/blue)](https://mindstudio-operator-tools-docs.readthedocs.io/zh-cn/latest/)
+ [![Ascend Community](https://badgen.net/badge/Ascend%20Community/Community/blue)](https://www.hiascend.com/en/developer/software/mindstudio)
+ [![Report Issues](https://badgen.net/badge/Report%20Issues/Issues/blue)](https://gitcode.com/Ascend/mstx/issues)
 
 </div>
 
@@ -69,10 +69,6 @@ We welcome contributions to the community. If you have any questions or suggesti
 
 ## 🙏 Acknowledgments
 
-This tool is jointly contributed by the following departments of Huawei:    
-🔹 Ascend Computing MindStudio Development Dept  
-🔹 Ascend Computing Ecosystem Enablement Dept   
-🔹 Ascend AI Cloud Service  
-🔹 2012 Compiler Lab  
-🔹 2012 Markov Lab  
-Thank you for every PR from the community. Contributions are welcome.
+This tool is jointly contributed by Huawei Technologies Co., Ltd. and developers.
+
+Thanks for every PR from the community, and contributions are welcome.
