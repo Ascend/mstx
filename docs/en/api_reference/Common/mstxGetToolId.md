@@ -31,19 +31,19 @@ Invalid value 0, indicating that no tool has launched the program.
 #define MSTX_TOOL_INVALID_ID 0x0
 ```  
 
-0x1000, indicating that the program is launched by [msprof Model Tuning Tool](https://atomgit.com/cann/oam-tools/blob/9.2.0/docs/zh/profiling/msprof_cmd/general_collect_commands.md) or [msPTI](https://atomgit.com/Ascend/mspti/blob/26.2.0/docs/en/user_guide/mspti_user_guide.md)
+0x1000, indicating that the program is launched by [msprof Model Tuning Tool](https://gitcode.com/cann/oam-tools/blob/9.2.0/docs/zh/profiling/msprof_cmd/general_collect_commands.md) or [msPTI](https://gitcode.com/Ascend/mspti/blob/26.2.0/docs/en/user_guide/mspti_user_guide.md)
 
 ```c
 #define MSTX_TOOL_MSPROF_ID 0x1000
 ```
 
-0x1001, indicating that the program is launched by the [Operator Tuning (msOpProf)](https://atomgit.com/Ascend/msopprof/blob/26.2.0/docs/en/user_guide/msopprof_user_guide.md) tool
+0x1001, indicating that the program is launched by the [Operator Tuning (msOpProf)](https://gitcode.com/Ascend/msopprof/blob/26.2.0/docs/en/user_guide/msopprof_user_guide.md) tool
 
 ```c
 #define MSTX_TOOL_MSOPPROF_ID 0x1001
 ```     
 
-0x1002, indicating that the program is launched by the [Exception Detection (msSanitizer)](https://atomgit.com/Ascend/mssanitizer/blob/26.2.0/docs/en/user_guide/mssanitizer_user_guide.md) tool
+0x1002, indicating that the program is launched by the [Exception Detection (msSanitizer)](https://gitcode.com/Ascend/mssanitizer/blob/26.2.0/docs/en/user_guide/mssanitizer_user_guide.md) tool
 
 ```c
 #define MSTX_TOOL_MSSANITIZER_ID 0x1002  
