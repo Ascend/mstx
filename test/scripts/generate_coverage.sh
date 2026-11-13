@@ -20,12 +20,29 @@
 #           构建目录为仓库根目录下的 build_ut_c / build_ut_cpp。
 # 产物：仓库根目录 coverage/ 下的 lcov info、HTML 报告及 report.tar.gz。
 # -------------------------------------------------------------------------
-set -e
-echo "***************Generate Coverage*****************"
+set -euo pipefail
 
 CUR_DIR=$(dirname $(readlink -f "$0"))
 TOP_DIR=$(readlink -f "${CUR_DIR}/../..")
 OUT_DIR="${TOP_DIR}/coverage"
+
+# 覆盖率门禁模式：仅输出 JSON 汇总，不生成报告文件。
+if [ "${1:-}" = "--check" ]; then
+    cd "${TOP_DIR}"
+    for build_dir in build_ut_c build_ut_cpp; do
+        if [ ! -d "${build_dir}" ]; then
+            echo "ERROR: build directory ${build_dir} not found, please run 'python build.py test local' first." >&2
+            exit 1
+        fi
+    done
+    # GCC 可能产生负的分支计数，忽略该告警但保留行覆盖数据。
+    "${2:-python3}" -m gcovr --root "${TOP_DIR}" --filter 'c/' --filter 'python/' \
+        --gcov-ignore-parse-errors negative_hits.warn_once_per_file \
+        --json-summary -j 8 "${TOP_DIR}/build_ut_c" "${TOP_DIR}/build_ut_cpp"
+    exit 0
+fi
+
+echo "***************Generate Coverage*****************"
 
 if [ -d "${OUT_DIR}" ]; then
     rm -rf "${OUT_DIR}"

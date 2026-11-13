@@ -15,9 +15,12 @@
 # See the Mulan PSL v2 for more details.
 # -------------------------------------------------------------------------
 import argparse
+import importlib.util
+import json
 import logging
 import multiprocessing
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -72,9 +75,35 @@ class BuildManager:
             self.parsed_arguments.build_version = self.parsed_arguments.version
             self.parsed_arguments.whl_version = self.parsed_arguments.version
 
-    def _execute_command(self, command_sequence, timeout_seconds=36000, cwd=None, env=None):
+    def _execute_command(self, command_sequence, timeout_seconds=36000, cwd=None, env=None,
+                         capture_stdout=False):
         logging.info("Running: %s", " ".join(command_sequence))
-        subprocess.run(command_sequence, timeout=timeout_seconds, check=True, cwd=cwd, env=env)
+        return subprocess.run(command_sequence, timeout=timeout_seconds, check=True, cwd=cwd, env=env,
+                              stdout=subprocess.PIPE if capture_stdout else None, text=True)
+
+    def _check_ut_line_coverage(self):
+        result = self._execute_command(
+            ["bash", str(self.project_root / "test/scripts/generate_coverage.sh"), "--check", sys.executable],
+            capture_stdout=True)
+        summary = json.loads(result.stdout)
+        total, covered = summary["line_total"], summary["line_covered"]
+        if (type(total) is not int or type(covered) is not int
+                or total <= 0 or not 0 <= covered <= total):
+            raise RuntimeError("Invalid C/CPP UT line coverage data")
+        logging.info("C/CPP UT line coverage: %.2f%% (%d/%d), required: 80%%",
+                     covered * 100.0 / total, covered, total)
+        if covered * 100 < total * 80:
+            raise RuntimeError("C/CPP UT line coverage is below the required 80%")
+
+    def _ensure_gcovr(self):
+        if importlib.util.find_spec("gcovr") is None:
+            self._execute_command([sys.executable, "-m", "pip", "install", "gcovr>=6"])
+        result = self._execute_command([sys.executable, "-m", "gcovr", "--version"], capture_stdout=True)
+        version = re.search(r"\bgcovr\s+(\d+)\.", result.stdout)
+        if version is None or int(version.group(1)) < 6:
+            raise RuntimeError(
+                "UT coverage requires gcovr >= 6. Install it in a dedicated test environment; "
+                "the existing installation will not be upgraded automatically.")
 
     def _build_test_target(self, lang, unit_test_build_dir):
         """构建指定语言变体（C 或 CPP）的测试目标。"""
@@ -248,15 +277,22 @@ class BuildManager:
             # ut 使用单独的目录构建，与 build 区分开，避免相互影响
             unit_test_build_dir = self.project_root / "build_ut"
 
+            self._ensure_gcovr()
             for lang in ("C", "CPP"):
                 self._build_test_target(lang, unit_test_build_dir)
 
             ut_c_dir = Path(f"{unit_test_build_dir}_c")
             ut_cpp_dir = Path(f"{unit_test_build_dir}_cpp")
 
+            # 清理历史计数，确保覆盖率只反映本次测试结果。
+            for build_dir in (ut_c_dir, ut_cpp_dir):
+                for counter in build_dir.rglob("*.gcda"):
+                    counter.unlink()
+
             self._run_c_tests(ut_c_dir, "C")
             self._run_c_tests(ut_cpp_dir, "CPP")
             self._run_python_tests(ut_cpp_dir)
+            self._check_ut_line_coverage()
         else:
             # -------------------- 产品构建 --------------------
             product_build_dir = self.project_root / "build"
